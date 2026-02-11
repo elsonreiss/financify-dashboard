@@ -27,7 +27,7 @@ import { Plus, Loader2, Tags } from "lucide-react";
 export default function Categories() {
   const queryClient = useQueryClient();
   const [name, setName] = useState("");
-  const [type, setType] = useState<"REVENUE" | "EXPENSE" | "">("");
+  const [type, setType] = useState<string>("");
 
   const { data: categories, isLoading, isError } = useQuery({
     queryKey: ["categories"],
@@ -74,7 +74,7 @@ export default function Categories() {
       });
       return;
     }
-    createMutation.mutate({ name: trimmedName, type });
+    createMutation.mutate({ name: trimmedName, categoryType: Number(type) });
   };
 
   return (
@@ -110,14 +110,14 @@ export default function Categories() {
                 <Label htmlFor="type">Tipo</Label>
                 <Select
                   value={type}
-                  onValueChange={(v) => setType(v as "REVENUE" | "EXPENSE")}
+                  onValueChange={(v) => setType(v)}
                 >
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Selecione o tipo" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="REVENUE">Receita</SelectItem>
-                    <SelectItem value="EXPENSE">Despesa</SelectItem>
+                    <SelectItem value="1">Receita</SelectItem>
+                    <SelectItem value="2">Despesa</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -183,12 +183,12 @@ export default function Categories() {
                           <Badge
                             variant="secondary"
                             className={
-                              cat.type === "REVENUE"
+                              cat.type === "REVENUE" || cat.type === 1
                                 ? "badge-revenue"
                                 : "badge-expense"
                             }
                           >
-                            {cat.type === "REVENUE" ? "Receita" : "Despesa"}
+                            {cat.type === "REVENUE" || cat.type === 1 ? "Receita" : "Despesa"}
                           </Badge>
                         </TableCell>
                       </TableRow>

@@ -3,12 +3,12 @@ const API_BASE = "http://localhost:8080";
 export interface Category {
   id: number;
   name: string;
-  type: "REVENUE" | "EXPENSE";
+  type: string | number;
 }
 
 export interface CreateCategoryPayload {
   name: string;
-  type: "REVENUE" | "EXPENSE";
+  categoryType: number;
 }
 
 async function handleResponse<T>(response: Response): Promise<T> {
