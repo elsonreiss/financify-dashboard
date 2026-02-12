@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, type CreateCategoryPayload } from "@/services/api";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Loader2, Tags } from "lucide-react";
+import { Plus, Loader2, Tags, AlertCircle } from "lucide-react";
 
 export default function Categories() {
   const queryClient = useQueryClient();
@@ -41,16 +41,11 @@ export default function Categories() {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
       setName("");
       setType("");
-      toast({
-        title: "Categoria criada!",
-        description: "A categoria foi salva com sucesso.",
-      });
+      toast.success("Categoria criada com sucesso!");
     },
     onError: (error: Error) => {
-      toast({
-        title: "Erro ao criar categoria",
+      toast.error("Erro ao criar categoria", {
         description: error.message,
-        variant: "destructive",
       });
     },
   });
@@ -59,18 +54,14 @@ export default function Categories() {
     e.preventDefault();
     const trimmedName = name.trim();
     if (!trimmedName || !type) {
-      toast({
-        title: "Campos obrigatórios",
+      toast.warning("Campos obrigatórios", {
         description: "Preencha o nome e selecione o tipo.",
-        variant: "destructive",
       });
       return;
     }
     if (trimmedName.length > 100) {
-      toast({
-        title: "Nome muito longo",
+      toast.warning("Nome muito longo", {
         description: "O nome deve ter no máximo 100 caracteres.",
-        variant: "destructive",
       });
       return;
     }
@@ -149,10 +140,11 @@ export default function Categories() {
               </div>
             )}
             {isError && (
-              <div className="text-center py-8 text-destructive">
-                <p className="font-medium">Erro ao carregar categorias</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Verifique se a API está disponível em http://localhost:8080
+              <div className="flex flex-col items-center justify-center py-8 text-destructive gap-2">
+                <AlertCircle className="h-8 w-8 opacity-60" />
+                <p className="font-medium">Não foi possível carregar as categorias</p>
+                <p className="text-sm text-muted-foreground">
+                  Verifique sua conexão e tente novamente.
                 </p>
               </div>
             )}
