@@ -43,10 +43,8 @@ export default function Categories() {
       setType("");
       toast.success("Categoria criada com sucesso!");
     },
-    onError: (error: Error) => {
-      toast.error("Erro ao criar categoria", {
-        description: error.message,
-      });
+    onError: () => {
+      toast.error("Não é possível criar com o mesmo nome.");
     },
   });
 
@@ -159,7 +157,6 @@ export default function Categories() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>ID</TableHead>
                       <TableHead>Nome</TableHead>
                       <TableHead>Tipo</TableHead>
                     </TableRow>
@@ -167,20 +164,17 @@ export default function Categories() {
                   <TableBody>
                     {categories.map((cat) => (
                       <TableRow key={cat.id}>
-                        <TableCell className="font-mono text-muted-foreground">
-                          {cat.id}
-                        </TableCell>
                         <TableCell className="font-medium">{cat.name}</TableCell>
                         <TableCell>
                           <Badge
                             variant="secondary"
                             className={
-                              cat.type === "REVENUE" || cat.type === 1
+                              cat.type === "REVENUE" || cat.type === 1 || (cat as any).categoryType === 1
                                 ? "badge-revenue"
                                 : "badge-expense"
                             }
                           >
-                            {cat.type === "REVENUE" || cat.type === 1 ? "Receita" : "Despesa"}
+                            {cat.type === "REVENUE" || cat.type === 1 || (cat as any).categoryType === 1 ? "Receita" : "Despesa"}
                           </Badge>
                         </TableCell>
                       </TableRow>

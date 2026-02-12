@@ -4,6 +4,7 @@ export interface Category {
   id: number;
   name: string;
   type: string | number;
+  categoryType?: number;
 }
 
 export interface CreateCategoryPayload {
