@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "@/components/AppLayout";
 import Dashboard from "@/pages/Dashboard";
 import Categories from "@/pages/Categories";
+import Revenues from "@/pages/Revenues";
+import Expenses from "@/pages/Expenses";
 import ComingSoon from "@/pages/ComingSoon";
 import NotFound from "@/pages/NotFound";
 
@@ -21,24 +23,8 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/categories" element={<Categories />} />
-            <Route
-              path="/revenues"
-              element={
-                <ComingSoon
-                  title="Receitas"
-                  description="Módulo de receitas será implementado em breve. A estrutura já está preparada para integração com /revenues."
-                />
-              }
-            />
-            <Route
-              path="/expenses"
-              element={
-                <ComingSoon
-                  title="Despesas"
-                  description="Módulo de despesas será implementado em breve. A estrutura já está preparada para integração com /expenses."
-                />
-              }
-            />
+            <Route path="/revenues" element={<Revenues />} />
+            <Route path="/expenses" element={<Expenses />} />
             <Route
               path="/reports"
               element={
