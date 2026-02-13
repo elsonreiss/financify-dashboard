@@ -31,7 +31,11 @@ export default function Categories() {
 
   const { data: categories, isLoading, isError } = useQuery({
     queryKey: ["categories"],
-    queryFn: api.categories.list,
+    queryFn: async () => {
+      const data = await api.categories.list();
+      console.log("Categories API response:", JSON.stringify(data, null, 2));
+      return data;
+    },
   });
 
   const createMutation = useMutation({
