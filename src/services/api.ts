@@ -3,7 +3,7 @@ const API_BASE = "http://localhost:8080";
 export interface Category {
   id: number;
   name: string;
-  type: string | number;
+  type?: string | number;
   categoryType?: number;
 }
 
