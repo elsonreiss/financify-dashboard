@@ -79,8 +79,8 @@ export default function TransactionPage({ type }: TransactionPageProps) {
 
   const filteredCategories = categories?.filter(
     (cat) =>
-      cat.type === cfg.categoryType ||
       cat.categoryType === cfg.categoryType ||
+      cat.type === cfg.categoryType ||
       cat.type === (cfg.categoryType === 1 ? "REVENUE" : "EXPENSE")
   );
 

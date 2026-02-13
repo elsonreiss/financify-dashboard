@@ -169,12 +169,12 @@ export default function Categories() {
                           <Badge
                             variant="secondary"
                             className={
-                              cat.type === "REVENUE" || cat.type === 1 || (cat as any).categoryType === 1
+                              cat.categoryType === 1 || cat.type === "REVENUE" || cat.type === 1
                                 ? "badge-revenue"
                                 : "badge-expense"
                             }
                           >
-                            {cat.type === "REVENUE" || cat.type === 1 || (cat as any).categoryType === 1 ? "Receita" : "Despesa"}
+                            {cat.categoryType === 1 || cat.type === "REVENUE" || cat.type === 1 ? "Receita" : "Despesa"}
                           </Badge>
                         </TableCell>
                       </TableRow>
